@@ -2,7 +2,6 @@ package practice;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import list.ArrayList;
 import list.List;
 import map.Map;
 import stack.LinkedStack;
@@ -169,71 +168,27 @@ public class OrderedTreeMap<K extends Comparable<K>, V> implements OrderedMap<K,
 
   @Override
   public K floorKey(K key) {
-    if (key == null) {
-      throw new IllegalArgumentException();
-    }
-    Node<K, V> node = root;
-    K best = null;
-    while (node != null) {
-      int cmp = key.compareTo(node.key);
-      if (cmp == 0) {
-        return node.key;
-      } else if (cmp < 0) {
-        node = node.left;
-      } else {
-        best = node.key;  // at or below key, so a candidate
-        node = node.right;
-      }
-    }
-    return best;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   @Override
   public K ceilingKey(K key) {
-    if (key == null) {
-      throw new IllegalArgumentException();
-    }
-    Node<K, V> node = root;
-    K best = null;
-    while (node != null) {
-      int cmp = key.compareTo(node.key);
-      if (cmp == 0) {
-        return node.key;
-      } else if (cmp > 0) {
-        node = node.right;
-      } else {
-        best = node.key;  // at or above key, so a candidate
-        node = node.left;
-      }
-    }
-    return best;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   @Override
   public List<K> keysBetween(K lo, K hi) {
-    if (lo == null || hi == null || lo.compareTo(hi) > 0) {
-      throw new IllegalArgumentException();
-    }
-    List<K> keys = new ArrayList<>();
-    keysBetween(root, lo, hi, keys);
-    return keys;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Appends the keys from lo to hi in the subtree rooted at node to keys, in
   // ascending order.
   private void keysBetween(Node<K, V> node, K lo, K hi, List<K> keys) {
-    if (node == null) {
-      return;
-    }
-    if (node.key.compareTo(lo) > 0) {
-      keysBetween(node.left, lo, hi, keys);
-    }
-    if (node.key.compareTo(lo) >= 0 && node.key.compareTo(hi) <= 0) {
-      keys.add(node.key);
-    }
-    if (node.key.compareTo(hi) < 0) {
-      keysBetween(node.right, lo, hi, keys);
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Returns the cached height of node. The empty tree has height -1.

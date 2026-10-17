@@ -22,13 +22,11 @@ public class RankedTreeMap<K extends Comparable<K>, V> implements RankedMap<K, V
     Node<K, V> left;
     Node<K, V> right;
     int height;
-    int size;  // number of nodes in the subtree rooted here
 
     Node(K key, V value) {
       this.key = key;
       this.value = value;
       height = 0;  // a new node is a leaf
-      size = 1;
     }
 
     @Override
@@ -110,7 +108,6 @@ public class RankedTreeMap<K extends Comparable<K>, V> implements RankedMap<K, V
       return node;
     }
     updateHeight(node);
-    updateSize(node);
     return rebalance(node);
   }
 
@@ -145,7 +142,6 @@ public class RankedTreeMap<K extends Comparable<K>, V> implements RankedMap<K, V
       node.right = remove(node.right, successor.key);
     }
     updateHeight(node);
-    updateSize(node);
     return rebalance(node);
   }
 
@@ -160,65 +156,45 @@ public class RankedTreeMap<K extends Comparable<K>, V> implements RankedMap<K, V
 
   @Override
   public int size() {
-    return size(root);
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   @Override
   public K select(int k) {
-    if (k < 1 || k > size()) {
-      throw new IllegalArgumentException();
-    }
-    return select(root, k).key;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Assumes k is from 1 to size(node). Returns the node with the k-th smallest
   // key in the subtree rooted at node.
   private Node<K, V> select(Node<K, V> node, int k) {
-    int leftSize = size(node.left);
-    if (k <= leftSize) {
-      return select(node.left, k);
-    } else if (k == leftSize + 1) {
-      return node;
-    } else {
-      return select(node.right, k - leftSize - 1);
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   @Override
   public int rank(K key) {
-    if (key == null) {
-      throw new IllegalArgumentException();
-    }
-    return rank(root, key);
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Returns the number of keys smaller than key in the subtree rooted at node.
   private int rank(Node<K, V> node, K key) {
-    if (node == null) {
-      return 0;
-    }
-
-    int cmp = key.compareTo(node.key);
-    if (cmp < 0) {
-      return rank(node.left, key);
-    } else if (cmp > 0) {
-      return size(node.left) + 1 + rank(node.right, key);
-    } else {
-      return size(node.left);
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Returns the cached size of node. The empty tree has size 0.
   private int size(Node<K, V> node) {
-    if (node == null) {
-      return 0;
-    }
-    return node.size;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Assumes node is not null and its children's cached sizes are correct.
   private void updateSize(Node<K, V> node) {
-    node.size = 1 + size(node.left) + size(node.right);
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Returns the cached height of node. The empty tree has height -1.
@@ -265,8 +241,6 @@ public class RankedTreeMap<K extends Comparable<K>, V> implements RankedMap<K, V
     child.right = root;
     updateHeight(root);  // root is now below child
     updateHeight(child);
-    updateSize(root);
-    updateSize(child);
     return child;
   }
 
@@ -277,8 +251,6 @@ public class RankedTreeMap<K extends Comparable<K>, V> implements RankedMap<K, V
     child.left = root;
     updateHeight(root);  // root is now below child
     updateHeight(child);
-    updateSize(root);
-    updateSize(child);
     return child;
   }
 
