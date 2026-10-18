@@ -8,15 +8,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-/**
- * Runs the Map contract suite against OrderedTreeMap, then checks floorKey,
- * ceilingKey, and keysBetween.
- */
+/** Runs the Map contract suite against OrderedTreeMap, then checks the ordered queries. */
 public class OrderedTreeMapTest extends MapTest {
 
   @Override
   protected Map<String, Integer> createMap() {
     return new OrderedTreeMap<>();
+  }
+
+  @Test
+  public void floorKeyOnAnEmptyMapIsNull() {
+    assertNull(new OrderedTreeMap<Integer, String>().floorKey(5));
+  }
+
+  @Test
+  public void ceilingKeyOnAnEmptyMapIsNull() {
+    assertNull(new OrderedTreeMap<Integer, String>().ceilingKey(5));
+  }
+
+  @Test
+  public void keysBetweenOnAnEmptyMapIsEmpty() {
+    assertKeys(new OrderedTreeMap<Integer, String>().keysBetween(0, 100));
   }
 
   @Test
@@ -65,16 +77,6 @@ public class OrderedTreeMapTest extends MapTest {
   }
 
   @Test
-  public void floorKeyOnAnEmptyMapIsNull() {
-    assertNull(new OrderedTreeMap<Integer, String>().floorKey(5));
-  }
-
-  @Test
-  public void ceilingKeyOnAnEmptyMapIsNull() {
-    assertNull(new OrderedTreeMap<Integer, String>().ceilingKey(5));
-  }
-
-  @Test
   public void keysBetweenReturnsTheKeysInRangeInOrder() {
     assertKeys(example().keysBetween(55, 78), 60, 70, 75);
   }
@@ -114,6 +116,36 @@ public class OrderedTreeMapTest extends MapTest {
     try {
       example().floorKey(null);
       fail("expected IllegalArgumentException for a null key");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
+  }
+
+  @Test
+  public void ceilingKeyOfNullThrows() {
+    try {
+      example().ceilingKey(null);
+      fail("expected IllegalArgumentException for a null key");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
+  }
+
+  @Test
+  public void keysBetweenWithNullLoThrows() {
+    try {
+      example().keysBetween(null, 50);
+      fail("expected IllegalArgumentException for a null lo");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
+  }
+
+  @Test
+  public void keysBetweenWithNullHiThrows() {
+    try {
+      example().keysBetween(50, null);
+      fail("expected IllegalArgumentException for a null hi");
     } catch (IllegalArgumentException e) {
       return;
     }
