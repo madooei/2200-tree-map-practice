@@ -8,10 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-/**
- * Runs the Map contract suite against RankedTreeMap, then checks select, rank,
- * and the cached subtree sizes.
- */
+/** Runs the Map contract suite against RankedTreeMap, then checks select, rank, and the cached sizes. */
 public class RankedTreeMapTest extends MapTest {
 
   @Override
@@ -20,31 +17,27 @@ public class RankedTreeMapTest extends MapTest {
   }
 
   @Test
+  public void selectOnAnEmptyMapThrows() {
+    RankedTreeMap<Integer, String> map = new RankedTreeMap<>();
+    try {
+      map.select(1);
+      fail("expected IllegalArgumentException when selecting from an empty map");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
+  }
+
+  @Test
+  public void rankOnAnEmptyMapIsZero() {
+    assertEquals(0, new RankedTreeMap<Integer, String>().rank(5));
+  }
+
+  @Test
   public void selectFindsEveryPosition() {
     RankedTreeMap<Integer, String> map = example();
     int[] sorted = {20, 30, 40, 50, 60, 70, 75, 80, 90};
     for (int k = 1; k <= sorted.length; k++) {
       assertEquals(sorted[k - 1], map.select(k), "k = " + k);
-    }
-  }
-
-  @Test
-  public void selectBelowOneThrows() {
-    try {
-      example().select(0);
-      fail("expected IllegalArgumentException for k = 0");
-    } catch (IllegalArgumentException e) {
-      return;
-    }
-  }
-
-  @Test
-  public void selectAboveSizeThrows() {
-    try {
-      example().select(10);
-      fail("expected IllegalArgumentException for k greater than size()");
-    } catch (IllegalArgumentException e) {
-      return;
     }
   }
 
@@ -83,6 +76,12 @@ public class RankedTreeMapTest extends MapTest {
     RankedTreeMap<Integer, String> map = example();
     map.put(40, "new");
     assertEquals(9, map.size());
+  }
+
+  @Test
+  public void overwritingAKeyKeepsTheCachedSizes() {
+    RankedTreeMap<Integer, String> map = example();
+    map.put(40, "new");
     assertSizesCorrect(readField(map, "root"));
   }
 
@@ -108,6 +107,36 @@ public class RankedTreeMapTest extends MapTest {
       map.remove(key);
     }
     assertEquals(101 - 34, map.size());
+  }
+
+  @Test
+  public void selectBelowOneThrows() {
+    try {
+      example().select(0);
+      fail("expected IllegalArgumentException for k = 0");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
+  }
+
+  @Test
+  public void selectAboveSizeThrows() {
+    try {
+      example().select(10);
+      fail("expected IllegalArgumentException for k greater than size()");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
+  }
+
+  @Test
+  public void rankOfNullThrows() {
+    try {
+      example().rank(null);
+      fail("expected IllegalArgumentException for a null key");
+    } catch (IllegalArgumentException e) {
+      return;
+    }
   }
 
   // Puts the keys 0 to 100 in a scrambled order, with some keys put twice.
@@ -150,7 +179,8 @@ public class RankedTreeMapTest extends MapTest {
     }
     int size = 1 + assertSizesCorrect(readField(node, "left"))
         + assertSizesCorrect(readField(node, "right"));
-    assertEquals(size, (int) (Integer) readField(node, "size"), "stale size at " + readField(node, "key"));
+    int cachedSize = (Integer) readField(node, "size");
+    assertEquals(size, cachedSize, "stale size at " + readField(node, "key"));
     return size;
   }
 }
