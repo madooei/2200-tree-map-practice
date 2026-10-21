@@ -77,6 +77,11 @@ public class OrderedTreeMapTest extends MapTest {
   }
 
   @Test
+  public void ceilingKeyCanBeFoundDeepOnTheLeft() {
+    assertEquals(75, example().ceilingKey(72));
+  }
+
+  @Test
   public void keysBetweenReturnsTheKeysInRangeInOrder() {
     assertKeys(example().keysBetween(55, 78), 60, 70, 75);
   }
@@ -103,8 +108,9 @@ public class OrderedTreeMapTest extends MapTest {
 
   @Test
   public void keysBetweenWithLoAboveHiThrows() {
+    OrderedTreeMap<Integer, String> map = example();
     try {
-      example().keysBetween(60, 50);
+      map.keysBetween(60, 50);
       fail("expected IllegalArgumentException when lo is greater than hi");
     } catch (IllegalArgumentException e) {
       return;
@@ -113,8 +119,9 @@ public class OrderedTreeMapTest extends MapTest {
 
   @Test
   public void floorKeyOfNullThrows() {
+    OrderedTreeMap<Integer, String> map = example();
     try {
-      example().floorKey(null);
+      map.floorKey(null);
       fail("expected IllegalArgumentException for a null key");
     } catch (IllegalArgumentException e) {
       return;
@@ -123,8 +130,9 @@ public class OrderedTreeMapTest extends MapTest {
 
   @Test
   public void ceilingKeyOfNullThrows() {
+    OrderedTreeMap<Integer, String> map = example();
     try {
-      example().ceilingKey(null);
+      map.ceilingKey(null);
       fail("expected IllegalArgumentException for a null key");
     } catch (IllegalArgumentException e) {
       return;
@@ -133,8 +141,9 @@ public class OrderedTreeMapTest extends MapTest {
 
   @Test
   public void keysBetweenWithNullLoThrows() {
+    OrderedTreeMap<Integer, String> map = example();
     try {
-      example().keysBetween(null, 50);
+      map.keysBetween(null, 50);
       fail("expected IllegalArgumentException for a null lo");
     } catch (IllegalArgumentException e) {
       return;
@@ -143,8 +152,9 @@ public class OrderedTreeMapTest extends MapTest {
 
   @Test
   public void keysBetweenWithNullHiThrows() {
+    OrderedTreeMap<Integer, String> map = example();
     try {
-      example().keysBetween(50, null);
+      map.keysBetween(50, null);
       fail("expected IllegalArgumentException for a null hi");
     } catch (IllegalArgumentException e) {
       return;
