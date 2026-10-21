@@ -106,13 +106,15 @@ public class RankedTreeMapTest extends MapTest {
     for (int key = 0; key < 101; key += 3) {
       map.remove(key);
     }
+    // The loop removes the 34 keys 0, 3, 6, ..., 99.
     assertEquals(101 - 34, map.size());
   }
 
   @Test
   public void selectBelowOneThrows() {
+    RankedTreeMap<Integer, String> map = example();
     try {
-      example().select(0);
+      map.select(0);
       fail("expected IllegalArgumentException for k = 0");
     } catch (IllegalArgumentException e) {
       return;
@@ -121,8 +123,9 @@ public class RankedTreeMapTest extends MapTest {
 
   @Test
   public void selectAboveSizeThrows() {
+    RankedTreeMap<Integer, String> map = example();
     try {
-      example().select(10);
+      map.select(10);
       fail("expected IllegalArgumentException for k greater than size()");
     } catch (IllegalArgumentException e) {
       return;
@@ -131,8 +134,9 @@ public class RankedTreeMapTest extends MapTest {
 
   @Test
   public void rankOfNullThrows() {
+    RankedTreeMap<Integer, String> map = example();
     try {
-      example().rank(null);
+      map.rank(null);
       fail("expected IllegalArgumentException for a null key");
     } catch (IllegalArgumentException e) {
       return;
