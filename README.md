@@ -50,9 +50,9 @@ There is no demo program for these problems; the tests are how you check your wo
 ## What's here
 
 - `practice.OrderedMap<K, V>` — the Map contract plus `floorKey`, `ceilingKey`, and `keysBetween`.
-- `practice.OrderedTreeMap<K, V>` — the chapter's `TreeMap` with the three ordered queries added. `floorKey` and `ceilingKey` each follow one path down the tree, and `keysBetween` skips every subtree that cannot hold a key in the range.
+- `practice.OrderedTreeMap<K, V>` — the chapter's `TreeMap`, extended to an `OrderedMap` with `floorKey`, `ceilingKey`, and `keysBetween`.
 - `practice.RankedMap<K, V>` — the Map contract plus `select`, which returns the k-th smallest key, and `rank`, which counts the keys smaller than a given key.
-- `practice.RankedTreeMap<K, V>` — the chapter's `TreeMap` with a cached subtree size in each node, kept current like the cached height. `select` and `rank` each follow one path down the tree, and `size()` reads the root's size.
+- `practice.RankedTreeMap<K, V>` — the chapter's `TreeMap`, extended to a `RankedMap` with `select` and `rank`.
 - `map.Map`, `list.List`, `list.ArrayList`, `stack.Stack`, `stack.LinkedStack` — copies of earlier chapters' code, included so this code compiles and runs on its own.
 - `map.MapTest` — the abstract Map contract suite from the map chapter. Both practice test classes run it against their own class.
 - `practice.OrderedTreeMapTest`, `practice.RankedTreeMapTest` — the tests for the two problems.
