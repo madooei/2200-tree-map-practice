@@ -30,6 +30,9 @@ code/
       stack/
         Stack.java                      # the Stack ADT, used by the iterator
         LinkedStack.java                # linked implementation of Stack
+      demo/                             # one demo per solution class
+        OrderedTreeMapDemo.java
+        RankedTreeMapDemo.java
     test/
       map/
         MapTest.java                    # abstract: the Map contract suite
@@ -38,14 +41,14 @@ code/
         RankedTreeMapTest.java          # the contract suite plus select and rank
   scripts/
     test.sh                             # compile and run the JUnit tests
+    run.sh                              # compile and run one demo
 ```
 
 ## How to compile and run
 
 - `scripts/test.sh` — compiles everything and runs the full JUnit suite.
 - `scripts/test.sh practice.OrderedTreeMapTest` — compiles everything and runs only that test class. Use this while you are working on one problem and the other is still empty.
-
-There is no demo program for these problems; the tests are how you check your work.
+- `scripts/run.sh demo.OrderedTreeMapDemo` — compiles everything and runs that one demo. Every problem class has its own demo, `<Class>Demo`.
 
 ## What's here
 
@@ -56,3 +59,4 @@ There is no demo program for these problems; the tests are how you check your wo
 - `map.Map`, `list.List`, `list.ArrayList`, `stack.Stack`, `stack.LinkedStack` — copies of earlier chapters' code, included so this code compiles and runs on its own.
 - `map.MapTest` — the abstract Map contract suite from the map chapter. Both practice test classes run it against their own class.
 - `practice.OrderedTreeMapTest`, `practice.RankedTreeMapTest` — the tests for the two problems.
+- `demo.OrderedTreeMapDemo`, `demo.RankedTreeMapDemo` — one demo per solution class, each on the tree from the notes.
