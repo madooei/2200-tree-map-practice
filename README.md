@@ -50,7 +50,7 @@ code/
 - `scripts/test.sh practice.OrderedTreeMapTest` — compiles everything and runs only that test class. Use this while you are working on one problem and the other is still empty.
 - `scripts/run.sh demo.OrderedTreeMapDemo` — compiles everything and runs that one demo. Every problem class has its own demo, `<Class>Demo`.
 
-## What's here
+## Contents
 
 - `practice.OrderedMap<K, V>` — the Map contract plus `floorKey`, `ceilingKey`, and `keysBetween`.
 - `practice.OrderedTreeMap<K, V>` — the chapter's `TreeMap`, extended to an `OrderedMap` with `floorKey`, `ceilingKey`, and `keysBetween`.
